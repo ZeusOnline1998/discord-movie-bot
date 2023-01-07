@@ -130,3 +130,6 @@ dmypy.json
 
 #Discord token
 token.txt
+
+#Vscode cache
+.vscode
