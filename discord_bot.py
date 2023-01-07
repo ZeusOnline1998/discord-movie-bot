@@ -7,15 +7,18 @@ from discordmovie import details
 with open('token.txt', 'r') as f:
     token = f.read()
 
+
 class MyClient(discord.Client):
 
-    d = discord.Guild.member_count
-    # for i in d.__str__:
-    #     print(i)
+
+
     async def on_ready(self):
         print(f'Logged on as {self.user}')
 
     async def on_message(self, message):
+
+        guild = message.guild
+
 
         channel = 'movie-bot-channel'
         bot = 'Movie Bot#8413'
@@ -44,7 +47,14 @@ class MyClient(discord.Client):
                     await message.channel.send(content=None,embed=embed)
 
                 elif message.content == '!users':
-                    await message.channel.send(f'Online users are : {discord.Guild.member_count}')
+                    embed = discord.Embed(title='Users')
+                    embed.add_field(name='Count',value=guild.member_count)
+                    members = []
+                    for i in guild.members:
+                        members.append(i.name)
+                    
+                    embed.add_field(name='Users',value=members)
+                    await message.channel.send(content=None,embed=embed)
 
                 else:
                     await message.channel.send('Unknown command type ! for help')
