@@ -23,17 +23,31 @@ class MyClient(discord.Client):
         if message.author != self.user:
 
             if str(message.channel) == channel:
+                
+                if message.content == '!':
+                    embed = discord.Embed(title='Bot Commands')
 
-                if message.content.startswith('!movie'):
+                    embed.add_field(name='!movie {movie name}',value='Movie Details')
+                    embed.add_field(name='!users',value ='Users count')
+
+                    await message.channel.send(embed=embed)
+
+                elif message.content.startswith('!movie'):
 
                     movie_name = message.content.replace('!movie ','')
-
                     movie_details = details(movie_name)
 
-                    await message.channel.send(f'{movie_details}')
+                    embed = discord.Embed(title='Movie Info')
+                    for k, v in movie_details.items():
+                        embed.add_field(name=k,value=v)
+
+                    await message.channel.send(content=None,embed=embed)
 
                 elif message.content == '!users':
                     await message.channel.send(f'Online users are : {discord.Guild.member_count}')
+
+                else:
+                    await message.channel.send('Unknown command type ! for help')
                 
             else:
 
