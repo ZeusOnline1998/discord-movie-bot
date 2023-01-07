@@ -53,8 +53,6 @@ def search_query_url(movie_name):
 
     movie_div = page_soup.find('div',class_='card v4 tight')
 
-    movie_link = movie_div.find('a')['href']
+    movie_link = "https://www.themoviedb.org"+movie_div.find('a')['href']
 
-    print(movie_link)
-
-    return "https://www.themoviedb.org"+movie_link
+    return movie_link
