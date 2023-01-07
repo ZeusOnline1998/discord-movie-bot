@@ -4,8 +4,8 @@ import discord
 from discord.ext import commands
 from discordmovie import details
 
-token = 'MTA2MTI5MDU2ODIzMzI2NzMwMw.GX1I9d.3ClQrRnrjD9RMJwFtD7xPRtDvngovHYHHUEQSg'
-
+with open('token.txt', 'r') as f:
+    token = f.read()
 
 class MyClient(discord.Client):
 
